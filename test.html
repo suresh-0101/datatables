@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic DataTable</title>
+
+
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <!-- JS Libraries -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        /* LEFT PANEL */
+        .control-panel {
+            width: 25%;
+            background: #fff;
+            padding: 20px;
+            border-right: 2px solid #ddd;
+        }
+
+        .control-panel h2 {
+            margin-bottom: 20px;
+        }
+
+        .control-panel input,
+        .control-panel button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .dt-btn-excel {
+            margin-left: 10px;
+            padding: 6px 12px;
+            border: none;
+            background: #27ae60;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dt-btn-excel:hover {
+            background: #1e8449;
+        }
+
+
+        .control-panel button {
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .control-panel button:hover {
+            background: #2980b9;
+        }
+
+        /* RIGHT PANEL */
+        .table-container {
+            width: 75%;
+            padding: 20px;
+        }
+
+        /* Move search box LEFT */
+        #dataTable_filter {
+            float: left;
+            text-align: left;
+        }
+
+        /* Move entries dropdown RIGHT */
+        #dataTable_length {
+            float: right;
+            text-align: right;
+        }
+
+        /* Add spacing below top bar */
+        .dataTables_wrapper .top {
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        /* Add border to table, rows, and cells */
+        #dataTable {
+            border-collapse: collapse;   /* ensures clean lines */
+            width: 100%;
+        }
+
+        #dataTable th,
+        #dataTable td {
+            border: 1px solid #ccc;     /* column lines + row lines */
+            padding: 8px;
+        }
+
+        #dataTable thead th {
+            background-color: #f7f7f7;
+            border-bottom: 2px solid #aaa;  /* stronger header bottom line */
+        }
+
+        /* Optional: Style the search input */
+        #dataTable_filter input {
+            width: 200px; /* You can adjust the width as per your needs */
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+
+        /* Outer border for DataTable */
+        #dataTable_wrapper {
+            border: 2px solid #444;
+            padding: 15px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- LEFT SIDE CONTROLS -->
+<div class="control-panel">
+    <h2>Query Data</h2>
+    <input type="text" id="queryParam" placeholder="Enter Query">
+    <button id="btnQuery" onclick="loadTable()">Run Query</button>
+</div>
+
+<!-- RIGHT SIDE TABLE -->
+<div class="table-container">
+    <h2>Results</h2>
+    <table id="dataTable" class="display" width="100%">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<!-- External JS -->
+<script src="app.js"></script>
+
+</body>
+</html>
