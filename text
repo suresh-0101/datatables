@@ -1,10 +1,22 @@
-function initOrderTable(jsonColumns) {
-  $('#orderTable').DataTable({
-    destroy: true,
-    scrollX: true,
-    searching: false,
-    paging: true,
-    data: [],
-    columns: buildColumnsFromJson(jsonColumns)
-  });
+function buildColumnsFromJson(jsonCols) {
+  var columns = [];
+
+  for (var i = 0; i < jsonCols.length; i++) {
+    var col = jsonCols[i];
+
+    if (col.VISIBLE !== true) {
+      continue; // skip hidden columns
+    }
+
+    columns.push({
+      data: toDataKey(col.NAME),
+      title: col.NAME,
+      visible: col.VISIBLE,
+      createdCell: col.TOOLTIP ? function (td, cellData) {
+        td.title = cellData || '';
+      } : null
+    });
+  }
+
+  return columns;
 }
