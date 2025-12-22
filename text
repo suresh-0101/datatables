@@ -1,22 +1,15 @@
-function buildColumnsFromJson(jsonCols) {
-  var columns = [];
-
-  for (var i = 0; i < jsonCols.length; i++) {
-    var col = jsonCols[i];
-
-    if (col.VISIBLE !== true) {
-      continue; // skip hidden columns
-    }
-
-    columns.push({
-      data: toDataKey(col.NAME),
-      title: col.NAME,
-      visible: col.VISIBLE,
-      createdCell: col.TOOLTIP ? function (td, cellData) {
-        td.title = cellData || '';
-      } : null
+table = $('#dataTable').DataTable({
+        ordering:false,
+        lengthChange: true,
+        pageLength: 10,
+        dom: '<"top"lfB>rt<"bottom"ip><"clear">',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Export Excel',
+                className: 'dt-btn-excel'
+            }
+        ],
+        data: [],
+        columns: getColumns()
     });
-  }
-
-  return columns;
-}
